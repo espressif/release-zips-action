@@ -1,0 +1,18 @@
+---
+name: "Release Zips"
+description: "Create a recursive clone zip file for a release"
+
+inputs:
+  github_token:
+    description: "GitHub token"
+    required: true
+  release_project_name:
+    description: "Name of the project to appear in the release"
+    required: false
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    GITHUB_TOKEN: ${{ inputs.github_token }}
+    RELEASE_PROJECT_NAME: ${{ inputs.release_project_name }}
