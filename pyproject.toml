@@ -3,7 +3,7 @@
     requires      = ["setuptools>=64"]
 
 [project]
-    authors = [{ name = "Espressif Systems" },{ name = "Angus Gratton", email = "angus@espressif.com" }]
+    authors = [{ name = "Espressif Systems" }]
     classifiers = [
         "Intended Audience :: Developers",
         "License :: OSI Approved :: Apache Software License",
@@ -15,13 +15,13 @@
     license = { text = "Apache 2.0" }
     name = "release-zips-action"
     readme = "README.md"
-    requires-python = ">=3.9"
+    requires-python = ">=3.11"
     urls.Changelog = "https://github.com/espressif/release-zips-action/tags/blob/master/CHANGELOG.md"
     urls.Homepage = "https://github.com/espressif/release-zips-action/tags"
     urls.Source = "https://github.com/espressif/release-zips-action/tags"
     urls.Tracker = "https://github.com/espressif/release-zips-action/tags/issues"
 
-    dependencies              = ["PyGithub==2.2.0"]
+    dependencies              = ["PyGithub~=2.6.1"]
     optional-dependencies.dev = ["czespressif", "just-bin~=1.26.0", "pip-tools~=7.3", "pre-commit>=3.3"]
 
 [tool]
@@ -50,7 +50,7 @@
         ignore_missing_imports   = true
         packages                 = "release_zips"
         pretty                   = true
-        python_version           = "3.9"
+        python_version           = "3.11"
         warn_return_any          = true
 
     [tool.vulture]
