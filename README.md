@@ -4,8 +4,8 @@ If you need to distribute source zip files containing a recursively cloned worki
 
 The difference between this zip file and the automatic zip file that GitHub allows you to download from any tag or release is:
 
-* This zip file is a recursive clone that includes all submodules.
-* This zip file is a valid Git working directory
+- This zip file is a recursive clone that includes all submodules.
+- This zip file is a valid Git working directory
 
 ## Creating a Release
 
@@ -26,15 +26,15 @@ on:
 jobs:
   release_zips:
     name: Create release zip files
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Create a recursive clone source zip for a Release
-        uses: espressif/github-actions/release_zips@master
+        uses: espressif/release-zips-action@v1
         env:
             RELEASE_PROJECT_NAME: ESP-IDF
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-* Note the `tags` filter for `push`, this limits the tag patterns for which a zip file should be created.
-* `RELEASE_PROJECT_NAME` is the name that will be used in the Draft Release title, of the form "$RELEASE_PROJECT_NAME [Pre-release|Release] $TAG"
-* `GITHUB_TOKEN` is needed to create the release, and used as a credential when cloning from GitHub (just in case). The token is not stored in the working directory, though.
+- Note the `tags` filter for `push`, this limits the tag patterns for which a zip file should be created.
+- `RELEASE_PROJECT_NAME` is the name that will be used in the Draft Release title, of the form "$RELEASE_PROJECT_NAME [Pre-release|Release] $TAG"
+- `GITHUB_TOKEN` is needed to create the release, and used as a credential when cloning from GitHub (just in case). The token is not stored in the working directory, though.
