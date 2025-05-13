@@ -22,7 +22,7 @@
     urls.Tracker = "https://github.com/espressif/release-zips-action/tags/issues"
 
     dependencies              = ["PyGithub~=2.6.1"]
-    optional-dependencies.dev = ["czespressif", "just-bin~=1.26.0", "pip-tools~=7.3", "pre-commit>=3.3"]
+    optional-dependencies.dev = ["czespressif", "just-bin~=1.26.0", "pip-tools~=7.3", "pre-commit>=4.0", "pytest~=8.0"]
 
 [tool]
     [tool.setuptools]
@@ -50,7 +50,7 @@
         ignore_missing_imports   = true
         packages                 = "release_zips"
         pretty                   = true
-        python_version           = "3.11"
+        python_version           = "3.12"
         warn_return_any          = true
 
     [tool.vulture]
@@ -81,8 +81,7 @@
         whitelines                       = 1
 
     [tool.pytest]
-        ini_options.addopts   = "-s --log-cli-level DEBUG --cov=czespressif --cov-report=term"
-        ini_options.markers   = ["settings: mark test to use custom czespressif settings from pyproject.toml"]
+        ini_options.addopts   = "-s --log-cli-level DEBUG"
         ini_options.testpaths = "tests"
 
     [tool.coverage]
