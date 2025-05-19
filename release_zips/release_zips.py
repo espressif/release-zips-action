@@ -2,23 +2,10 @@
 
 import argparse
 import os
-import shlex
 import subprocess
 
 from github import Github
 from github import GithubException
-
-# Define an allowlist of allowed git arguments
-ALLOWED_GIT_ARGS = ['--shallow-since']
-
-
-def validate_git_args(extra_args):
-    parsed_args = shlex.split(extra_args)
-    for arg in parsed_args:
-        # Check if the argument starts with an allowed prefix
-        if not any(arg.startswith(allowed) for allowed in ALLOWED_GIT_ARGS):
-            raise ValueError(f'Invalid git argument: {arg}')
-    return parsed_args
 
 
 def main():
@@ -52,14 +39,7 @@ def main():
     repo_name = github_repo.split('/')[1]
     directory = f'{repo_name}-{tag}'
 
-    clone_cmd = ['git', 'clone', '--recursive', '--branch', tag]
-    if git_extra_args:
-        try:
-            validated_args = validate_git_args(git_extra_args)
-            clone_cmd.extend(validated_args)
-        except ValueError as e:
-            raise SystemExit(str(e)) from e
-    clone_cmd.extend([git_url, directory])
+    clone_cmd = ['git', 'clone', '--recursive', '--branch', tag, git_extra_args, git_url, directory]
     print(f'Cloning {git_url} (tag: {tag}) into {directory}...')
     print(f'Running: {" ".join(clone_cmd)}')
     subprocess.run(clone_cmd, check=True)

@@ -18,4 +18,4 @@ WORKDIR /app
 COPY requirements.txt release_zips/release_zips.py ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-ENTRYPOINT ["python", "release_zips.py"]
+ENTRYPOINT ["python", "/app/release_zips.py"]
