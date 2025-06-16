@@ -9,6 +9,10 @@ inputs:
   release_project_name:
     description: "Name of the project to appear in the release"
     required: false
+  git_extra_args:
+    description: 'Extra arguments for git clone (e.g. --shallow-since="1 year ago")'
+    required: false
+    default: ''
 
 runs:
   using: "docker"
@@ -16,3 +20,4 @@ runs:
   env:
     GITHUB_TOKEN: ${{ inputs.github_token }}
     RELEASE_PROJECT_NAME: ${{ inputs.release_project_name }}
+    INPUT_GIT_EXTRA_ARGS: ${{ inputs.git_extra_args }}

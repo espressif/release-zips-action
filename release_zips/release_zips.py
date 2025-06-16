@@ -1,13 +1,24 @@
 #!/usr/bin/env python3
 
 import os
+import shlex
 import subprocess
 
 from github import Github
 from github import GithubException
 
 
+def build_clone_command(git_url, tag, directory, git_extra_args=None):
+    """Build the git clone command with optional extra arguments."""
+    clone_cmd = ['git', 'clone', '--recursive', '--branch', tag]
+    if git_extra_args:
+        clone_cmd.extend(shlex.split(git_extra_args))
+    clone_cmd.extend([git_url, directory])
+    return clone_cmd
+
+
 def main():
+    git_extra_args = os.environ.get('INPUT_GIT_EXTRA_ARGS')
     ref = os.environ.get('GITHUB_REF')
     if not ref:
         raise SystemExit('Not an event based on a push. Workflow configuration is wrong?')
@@ -37,8 +48,10 @@ def main():
     repo_name = github_repo.split('/')[1]
     directory = f'{repo_name}-{tag}'
 
+    clone_cmd = build_clone_command(git_url, tag, directory, git_extra_args)
     print(f'Cloning {git_url} (tag: {tag}) into {directory}...')
-    subprocess.run(['git', 'clone', '--recursive', '--branch', tag, git_url, directory], check=True)
+    print(f'Running: {" ".join(clone_cmd)}')
+    subprocess.run(clone_cmd, check=True)
 
     zipfile = f'{directory}.zip'
     print(f'Creating zip archive {zipfile}...')
