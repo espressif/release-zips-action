@@ -12,7 +12,7 @@ class TestBuildCloneCommand:
             "v1.0.0",
             "repo-v1.0.0",
             None,
-            ['git', 'clone', '--recursive', '--branch', 'v1.0.0',
+            ['git', 'clone', '--recursive', '--shallow-submodules', '--branch', 'v1.0.0',
              'https://github.com/example/repo.git', 'repo-v1.0.0']
         ),
         # Single extra git argument
@@ -21,7 +21,7 @@ class TestBuildCloneCommand:
             "v2.1.0",
             "my-repo-v2.1.0",
             "--depth=1",
-            ['git', 'clone', '--recursive', '--branch', 'v2.1.0',
+            ['git', 'clone', '--recursive', '--shallow-submodules', '--branch', 'v2.1.0',
              '--depth=1', 'https://github.com/example/repo.git', 'my-repo-v2.1.0']
         ),
         # Multiple extra git arguments
@@ -30,7 +30,7 @@ class TestBuildCloneCommand:
             "v3.0.0-beta",
             "repo-v3.0.0-beta",
             "--depth=1 --single-branch --no-tags",
-            ['git', 'clone', '--recursive', '--branch', 'v3.0.0-beta',
+            ['git', 'clone', '--recursive', '--shallow-submodules', '--branch', 'v3.0.0-beta',
              '--depth=1', '--single-branch', '--no-tags',
              'https://github.com/example/repo.git', 'repo-v3.0.0-beta']
         ),
@@ -40,7 +40,7 @@ class TestBuildCloneCommand:
             "v1.5.0",
             "test-repo-v1.5.0",
             "",
-            ['git', 'clone', '--recursive', '--branch', 'v1.5.0',
+            ['git', 'clone', '--recursive', '--shallow-submodules', '--branch', 'v1.5.0',
              'https://github.com/example/repo.git', 'test-repo-v1.5.0']
         ),
     ])
