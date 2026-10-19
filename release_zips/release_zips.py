@@ -10,7 +10,7 @@ from github import GithubException
 
 def build_clone_command(git_url, tag, directory, git_extra_args=None):
     """Build the git clone command with optional extra arguments."""
-    clone_cmd = ['git', 'clone', '--recursive', '--branch', tag]
+    clone_cmd = ['git', 'clone', '--recursive', '--shallow-submodules', '--branch', tag]
     if git_extra_args:
         clone_cmd.extend(shlex.split(git_extra_args))
     clone_cmd.extend([git_url, directory])

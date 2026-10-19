@@ -51,3 +51,4 @@ jobs:
 - `git_extra_args` is passed to `git clone`, so you can use it to limit the history of the clone. This is useful if you
   have a large repo and want to limit the size of the zip file. For example, `--shallow-since="1 year ago"` will only
   include commits from the last year.
+- The clone uses `--shallow-submodules`, so submodules are always cloned with depth 1.
